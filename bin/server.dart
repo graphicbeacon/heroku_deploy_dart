@@ -24,11 +24,13 @@ void main(List<String> args) async {
     return;
   }
 
-  var handler = createStaticHandler('build', defaultDocument: 'index.html');
+  // // Static file server
+  // var handler = createStaticHandler('build', defaultDocument: 'index.html');
 
-  // var handler = const shelf.Pipeline()
-  //     .addMiddleware(shelf.logRequests())
-  //     .addHandler(_echoRequest);
+  // API server
+  var handler = const shelf.Pipeline()
+      .addMiddleware(shelf.logRequests())
+      .addHandler(_echoRequest);
 
   var server = await io.serve(handler, _hostname, port);
   print('Serving at http://${server.address.host}:${server.port}');
